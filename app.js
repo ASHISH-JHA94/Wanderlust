@@ -21,6 +21,8 @@ const upload=multer({storage});
 
 const Review=require("./models/review.js");
 
+const secretkey=process.env.secret;
+
 
 
 const session=require("express-session");
@@ -72,7 +74,7 @@ app.use(express.static(path.join(__dirname,"/public")));
 const store=Mongostore.create({
     mongoUrl:atlas_db,
     crypto:{
-        secret:"mysupersecretcode",
+        secret:secretkey
     },
     touchAfter:24*3600,
 });
@@ -83,7 +85,7 @@ store.on("error",()=>{
 
 const sessionoptions={
     store,
-    secret:"mysupersecretcode",
+    secret:secretkey,
     resave:false,
     saveUninitialized:true,
     cookie:{
