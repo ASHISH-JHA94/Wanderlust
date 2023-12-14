@@ -1,0 +1,124 @@
+<% layout("/layouts/boiler") %>
+
+    <body>
+        <h3>Listing Details</h3>
+        <div class="row">
+            <div class="card col-8 offset-4" style="width: 28rem;">
+                <img src="<%= data.image.url %>" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <b>
+                            <%=data.owner.username %>
+                        </b>
+                    </h5>
+                    <h5 class="card-title">
+                        <b>
+                            <%=data.title %>
+                        </b>
+                    </h5>
+                    <p class="card-text">
+                        <%=data.description %>
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> &#x20b9 <%=data.price.toLocaleString("en-IN") %></li>
+                    <li class="list-group-item">
+                        <%=data.location %>
+                    </li>
+                    <li class="list-group-item">
+                        <%=data.country %>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+         <!-- <  if( curruser && curruser._id.equals(data.owner.id)){ %>  -->
+        <div class="cont mb-5">
+            <div class="a">
+                <form method="GET" class="card-link" action="/listing/<%= data._id  %>/edit">
+                    <button class="btn btn-dark">Edit</button>
+                </form>
+            </div>
+            <div class="a offset-1">
+                <form method="POST" class="card-link" action="/listing/<%= data._id %>?_method=DELETE">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+
+            </div>
+
+        </div>
+         <!-- < } %> -->
+        </div>
+        
+            <div class="col-8 offset-4">
+                <hr>
+                <% if(curruser) {%>
+
+
+                <form action="/listing/<%= data._id%>/reviews" method="POST" novalidate class="needs-validation">
+                    <div class="mb-3 mt-3">
+                        <label for="rating" class="form-label">Rating</label>
+                        <fieldset class="starability-slot">
+                           
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+                            
+                            
+                            
+                            
+                            
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="comment" class="form-label">Comments</label>
+                        <textarea name="review[comment]" id="comment" cols="20" rows="5" class="form-control"
+                            required></textarea>
+                        <div class="invalid-feedback">
+                            please add comment
+                        </div>
+                    </div>
+
+                    
+                    <button class="btn btn-outline-dark">Submit</button>
+                </form>
+            <% } %>
+            <p><b>All Reviews</b></p>
+            <div class="row">
+                <% for(review of data.reviews) { %>
+                    <div class="card custom-border  col-5 ms-5 mb-3">
+                        <div class="card-body ">
+                            <h5 class="card-title"><%= review.author.username %></h5>
+                            <p class="card-text">
+                                <%= review.comment %>
+                            </p>
+                            <p class="starability-result card-text"  data-rating="<%= review.rating %>">
+                                <%= review.rating %> star
+                            </p>
+                        </div>
+                        <form class="mb-3" method="POST" action="/listing/<%=data._id %>/reviews/<%= review._id %>?_method=DELETE">
+                            <button class="btn btn-sm btn-dark mt-2">
+                                Delete
+
+                            </button> 
+
+                        </form>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+
+
+
+
+
+    </body>

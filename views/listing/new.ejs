@@ -1,0 +1,49 @@
+<% layout("/layouts/boiler") %>
+
+    <body>
+        <div class="row">
+            <div class="col-8 offset-2">
+                <h2><b>Create New Listing</b></h2>
+                <form method="POST" action="/listing" class="needs-validation"   novalidate
+                enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" name="title" placeholder="Enter title" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="description" placeholder="Enter description" class="form-control" required> </textarea>
+                    </div>
+
+                    
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" placeholder="enter image url" name="image" class="form-control" required>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-4">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="text" name="price" placeholder="Enter price " class="form-control" required>
+                        </div>
+                        <div class="mb-3 col-md-8">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" name="country" placeholder="Enter country" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="location" class="form-label">location</label>
+                        <input type="text" name="location" placeholder="Enter location" class="form-control" required>
+                    </div>
+
+
+
+
+                    <button  class="btn btn-primary">Save</button>
+
+                </form>
+            </div>
+        </div>
+
+    </body>
