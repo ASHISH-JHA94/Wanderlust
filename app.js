@@ -98,9 +98,9 @@ const sessionoptions={
 
 
 
-// app.get("/",(req,res)=>{
-//     res.send("root working");
-// });
+app.get("/",(req,res)=>{
+    res.redirect('/listing');
+});
 
 app.use(session(sessionoptions));
 
