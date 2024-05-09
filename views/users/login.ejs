@@ -1,29 +1,92 @@
 <% layout("/layouts/boiler") %>
 
-<body>
-    <div class="row mt-3 justify-content-centre align-items-centre">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <style>
+        /* Custom CSS for styling */
 
-        <h1 style="text-align:center">signup on wanderlust</h1>
-        <div class="col-4 offset-4">
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            
+        }
+
+        /* Centering the content vertically and horizontally */
+        .row {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Styling the form */
+        .form-container {
+            width: 90%;
+            max-width: 500px;
+            height: 45vh;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #f8f9fa;
+        }
+
+        /* Centering the heading */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #343a40;
+            font-size: 2rem;
+        }
+
+        /* Styling the form inputs */
+        .form-label {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        /* Styling the submit button */
+        .btn-success {
+            width: 100%;
+            background-color: #28a745;
+            border: none;
+            margin-top: 2rem;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-10 col-sm-8 col-md-6 col-lg-4 form-container">
+            <h1>Login on Wanderlust</h1>
             <form action="/login" method="POST" class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input name="username" id="username" type="text" class="form-control" required />
-                    
-                </div>
-                
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input name="password" id="password" type="password" class="form-control" required />
-                    
+                    <div class="invalid-feedback feedback">
+                        Please enter your username.
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <button class="btn btn-success">sign in</button>
+                    <label for="password" class="form-label">Password</label>
+                    <input name="password" id="password" type="password" class="form-control" required />
+                    <div class="invalid-feedback feedback">
+                        Please enter your password.
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <button type="submit" class="btn btn-success">Sign in</button>
                 </div>
             </form>
         </div>
     </div>
-
-</body>  
-
+</body>

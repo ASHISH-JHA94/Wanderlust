@@ -1,71 +1,76 @@
 <style>
-  .searchbtn{
-    background-color: #4d1da7;
-    color: aliceblue;
-    width:7rem;
-    height:2.5rem;
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    border-radius: 2rem;
-    justify-content: center;
-    align-items: center;
-    
-    
-  }
-  .searchbtn:hover{
-    background-color: #4d1da7;
-    color: aliceblue;
-    
-  }
-  .searchbar{
-    width:25vw;
-    height:3rem;
-    border-radius: 2rem;
-    text-align: center;
-    border: 1px solid black;
-    
-  }
-  .fa-brands fa-searchengin{
-    margin-left: 3rem;
-  }
-</style>
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/listing"><i class="fa-solid fa-compass fa-beat-fade fa-2xl" style="color: #3c1584;"></i></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          
-          <a class="nav-link text-dark" href="/listing">Explore</a>
-          
-          
-        </div>
-        <form class="d-flex navbar-nav ms-auto " method="get" role="search" action="/search">
-          <input class="form-control me-2 searchbar" type="search" placeholder="Search country Name" aria-label="Search" name="countryname" required>
-          <button class="btn btn-outline searchbtn" type="submit">
-            Search
-            <i class="fa-brands fa-searchengin"></i>
-          </button>
-        </form>
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link text-dark" href="/listing/new">New Listing</a>
-          <% if(!curruser){ %>
-            <a class="nav-link text-dark"  href="/login"><b>login</b></a>
-            <a class="nav-link text-dark" href="/signup"><b>signup</b></a>
-
+    /* Custom CSS for styling */
+  
+    /* Styling the search button */
+    .searchbtn {
+      background-color: #4d1da7;
+      color: aliceblue;
+      width: 7rem;
+      height: 2.5rem;
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      border-radius: 2rem;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  
+    .searchbtn:hover {
+      background-color: #3c1584;
+    }
+  
+    /* Styling the search bar */
+    .searchbar {
+      width: 100%;
+      max-width: 25vw;
+      height: 3rem;
+      border-radius: 2rem;
+      text-align: center;
+      border: 1px solid black;
+      transition: border-color 0.3s ease;
+    }
+  
+    /* Styling the search icon */
+    .search-icon {
+      margin-left: 0.5rem;
+      font-size: 1rem;
+    }
+  
+    /* Custom CSS for responsiveness */
+    @media (max-width: 768px) {
+      .searchbar {
+        max-width: 100%;
+      }
+    }
+  </style>
+  <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/listing"><i class="fa-solid fa-compass fa-beat-fade fa-2xl" style="color: #3c1584;"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link text-dark" href="/listing">Explore</a>
+          </div>
+          <form class="d-flex navbar-nav ms-auto " method="get" role="search" action="/search">
+            <input class="form-control me-2 searchbar" type="search" placeholder="Search country Name" aria-label="Search" name="countryname" required>
+            <button class="btn btn-outline searchbtn" type="submit">
+              Search
+              <i class="fas fa-search search-icon"></i>
+            </button>
+          </form>
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link text-dark" href="/listing/new">New Listing</a>
+            <% if(!curruser){ %>
+              <a class="nav-link text-dark"  href="/login"><b>login</b></a>
+              <a class="nav-link text-dark" href="/signup"><b>signup</b></a>
             <% } %>
-
             <% if(curruser){ %>
               <a class="nav-link text-dark" href="/logout">logout</a>
-  
-              <% } %>
-          
-          
-          
+            <% } %>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>

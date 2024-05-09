@@ -1,66 +1,135 @@
 <% layout("/layouts/boiler") %>
 
+<head>
+    <style>
+        /* Custom CSS for styling */
 
-    <body>
-        <!-- <h3>All Listings</h3> -->
-        <!-- <form method="GET" action="/listing/new">
-        <button>Create New Listing</button>
-    </form> -->
-        <div id="features">
-            <div class="feature">
-                <i class="fa-solid fa-house"></i>
-                <p>HouseBoats</p>
-            </div>
-            <div class="feature">
-                <i class="fa-solid fa-fire"></i>
-                <p>Trending</p>
+        /* Styling features section */
+        #features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
 
-            </div>
-            <div class="feature">
-                <i class="fa-solid fa-tractor"></i>
-                <p>Farm</p>
-            </div>
-            <div class="feature">
-                <i class="fa-solid fa-ship"></i>
-                <p>ship</p>
-            </div>
-            <div class="feature">
-                <i class="fa-solid fa-person-swimming"></i>
-                <p>Amazing pool</p>
-            </div>
-            <div class="feature">
-                <i class="fa-solid fa-kitchen-set"></i>
-                <p>kitchen</p>
-            </div>
-            <div class="feature">
-                <i class="fa-solid fa-caravan"></i>
-                <p>vechicle House</p>
-            </div>
-            <div class="form-check form-switch form-check-reverse feature" id="tax-toggle">
-  <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
-  <label class="form-check-label" for="flexSwitchCheckReverse">Display Tax</label>
-</div>
+        .feature {
+            text-align: center;
+            width: 150px; /* Set a fixed width for the feature */
+            flex: 0 0 auto; /* Prevent flex items from shrinking */
+        }
 
+        .feature i {
+            font-size: 2rem;
+            color: #4d1da7;
+        }
+
+        .feature p {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #4d1da7;
+        }
+
+        /* Styling card */
+        .listing {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card {
+            margin: 10px;
+            border: none;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img-top {
+            border-radius: 10px;
+        }
+
+        .card-body {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+        }
+
+        .Tax {
+            color: #4d1da7;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive layout */
+        @media (max-width: 768px) {
+            
+
+            .feature i {
+                font-size: 1.5rem; /* Reduce icon size */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Features section -->
+    <div id="features">
+        <div class="feature">
+            <i class="fa-solid fa-house"></i>
+            <p>HouseBoats</p>
         </div>
+        <div class="feature">
+            <i class="fa-solid fa-fire"></i>
+            <p>Trending</p>
+        </div>
+        <div class="feature">
+            <i class="fa-solid fa-tractor"></i>
+            <p>Farm</p>
+        </div>
+        <div class="feature">
+            <i class="fa-solid fa-ship"></i>
+            <p>Ship</p>
+        </div>
+        <div class="feature">
+            <i class="fa-solid fa-person-swimming"></i>
+            <p>Amazing Pool</p>
+        </div>
+        <div class="feature">
+            <i class="fa-solid fa-kitchen-set"></i>
+            <p>Kitchen</p>
+        </div>
+        <div class="feature">
+            <i class="fa-solid fa-caravan"></i>
+            <p>Vehicle House</p>
+        </div>
+        <div class="form-check form-switch form-check-reverse feature" id="tax-toggle">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+            <label class="form-check-label" for="flexSwitchCheckReverse">Display Tax</label>
+        </div>
+    </div>
 
-
+    <!-- Listings section -->
+    <div class="container-fluid">
         <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
             <% for (let listing of list) { %>
-                <a href="/listing/<%= listing._id %>" class="listing">
-                    <div class="card col">
-                        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height:20rem" />
-                        <div class="card-img-overlay"></div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <b>
-                                    <%=listing.title %>
-                                </b> <br />
-                                &#8377; <%=listing. price.toLocaleString("en-IN") %> / night
-                                <i class="Tax">+18% GST</i>
-                            </p>
-                        </div>
+            <a href="/listing/<%= listing._id %>" class="listing">
+                <div class="card col">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height:20rem" />
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b><%= listing.title %></b><br />
+                            &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+                            <i class="Tax">+18% GST</i>
+                        </p>
                     </div>
-                </a>
-                <% } %>
+                </div>
+            </a>
+            <% } %>
         </div>
-    </body>
+    </div>
+</body>

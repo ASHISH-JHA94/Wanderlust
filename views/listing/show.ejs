@@ -1,124 +1,168 @@
 <% layout("/layouts/boiler") %>
 
-    <body>
-        <h3>Listing Details</h3>
+<head>
+    <style>
+        /* General styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            padding-top: 20px;
+        }
+
+        h3 {
+            text-align: center;
+            color: #3c1584;
+            margin-bottom: 20px;
+        }
+
+        /* Card styling */
+        .card {
+            background-color: #fff;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3c1584;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .list-group-item {
+            font-size: 1.2rem;
+            color: #343a40;
+            border: none;
+        }
+
+        /* Button styling */
+        .btn {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-dark {
+            background-color: #3c1584;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-dark:hover {
+            background-color: #2e0f6f;
+        }
+
+        /* Review card styling */
+        .review-card {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .author {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #3c1584;
+            margin-bottom: 10px;
+        }
+
+        .rating {
+            font-size: 1.2rem;
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .comment {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            .card {
+                padding: 15px;
+            }
+
+            .card img {
+                margin-bottom: 15px;
+            }
+
+            .card-title {
+                font-size: 1.3rem;
+            }
+
+            .card-text,
+            .list-group-item,
+            .author,
+            .rating,
+            .comment {
+                font-size: 1rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Listing Details</h3>
+
+    <div class="container">
         <div class="row">
-            <div class="card col-8 offset-4" style="width: 28rem;">
-                <img src="<%= data.image.url %>" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <b>
-                            <%=data.owner.username %>
-                        </b>
-                    </h5>
-                    <h5 class="card-title">
-                        <b>
-                            <%=data.title %>
-                        </b>
-                    </h5>
-                    <p class="card-text">
-                        <%=data.description %>
-                    </p>
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <img src="<%= data.image.url %>" class="card-img-top" alt="Listing Image">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= data.owner.username %></h5>
+                        <h5 class="card-title"><%= data.title %></h5>
+                        <p class="card-text"><%= data.description %></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">&#x20b9;<%= data.price.toLocaleString("en-IN") %></li>
+                        <li class="list-group-item"><%= data.location %></li>
+                        <li class="list-group-item"><%= data.country %></li>
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"> &#x20b9 <%=data.price.toLocaleString("en-IN") %></li>
-                    <li class="list-group-item">
-                        <%=data.location %>
-                    </li>
-                    <li class="list-group-item">
-                        <%=data.country %>
-                    </li>
-                </ul>
             </div>
         </div>
-        
-         <!-- <  if( curruser && curruser._id.equals(data.owner.id)){ %>  -->
-        <div class="cont mb-5">
-            <div class="a">
-                <form method="GET" class="card-link" action="/listing/<%= data._id  %>/edit">
-                    <button class="btn btn-dark">Edit</button>
-                </form>
+
+        <!-- Reviews Section -->
+        <div class="row">
+            <% for (review of data.reviews) { %>
+            <div class="col-md-8 offset-md-2">
+                <div class="review-card">
+                    <p class="author"><%= review.author.username %></p>
+                    <p class="rating">Rating: <%= review.rating %> star</p>
+                    <p class="comment"><%= review.comment %></p>
+                    <form method="POST" action="/listing/<%= data._id %>/reviews/<%= review._id %>?_method=DELETE">
+                        <button class="btn btn-dark">Delete</button>
+                    </form>
+                </div>
             </div>
-            <div class="a offset-1">
-                <form method="POST" class="card-link" action="/listing/<%= data._id %>?_method=DELETE">
-                    <button class="btn btn-danger">Delete</button>
-                </form>
-
-            </div>
-
-        </div>
-         <!-- < } %> -->
-        </div>
-        
-            <div class="col-8 offset-4">
-                <hr>
-                <% if(curruser) {%>
-
-
-                <form action="/listing/<%= data._id%>/reviews" method="POST" novalidate class="needs-validation">
-                    <div class="mb-3 mt-3">
-                        <label for="rating" class="form-label">Rating</label>
-                        <fieldset class="starability-slot">
-                           
-                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
-                            
-                            
-                            
-                            
-                            
-                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-                            <label for="first-rate1" title="Terrible">1 star</label>
-                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-                            <label for="first-rate2" title="Not good">2 stars</label>
-                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-                            <label for="first-rate3" title="Average">3 stars</label>
-                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-                            <label for="first-rate4" title="Very good">4 stars</label>
-                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-                            <label for="first-rate5" title="Amazing">5 stars</label>
-                        </fieldset>
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label for="comment" class="form-label">Comments</label>
-                        <textarea name="review[comment]" id="comment" cols="20" rows="5" class="form-control"
-                            required></textarea>
-                        <div class="invalid-feedback">
-                            please add comment
-                        </div>
-                    </div>
-
-                    
-                    <button class="btn btn-outline-dark">Submit</button>
-                </form>
             <% } %>
-            <p><b>All Reviews</b></p>
-            <div class="row">
-                <% for(review of data.reviews) { %>
-                    <div class="card custom-border  col-5 ms-5 mb-3">
-                        <div class="card-body ">
-                            <h5 class="card-title"><%= review.author.username %></h5>
-                            <p class="card-text">
-                                <%= review.comment %>
-                            </p>
-                            <p class="starability-result card-text"  data-rating="<%= review.rating %>">
-                                <%= review.rating %> star
-                            </p>
-                        </div>
-                        <form class="mb-3" method="POST" action="/listing/<%=data._id %>/reviews/<%= review._id %>?_method=DELETE">
-                            <button class="btn btn-sm btn-dark mt-2">
-                                Delete
-
-                            </button> 
-
-                        </form>
-                    </div>
-                <% } %>
-            </div>
         </div>
-
-
-
-
-
-
-    </body>
+    </div>
+</body>

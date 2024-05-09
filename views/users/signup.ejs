@@ -1,10 +1,68 @@
 <% layout("/layouts/boiler") %>
 
-<body>
-    <div class="row mt-3 justify-content-centre align-items-centre">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for styling */
 
-        <h1 style="text-align:center">signup on wanderlust</h1>
-        <div class="col-4 offset-4">
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        /* Centering the content vertically and horizontally */
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Styling the form */
+        .form-container {
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #f8f9fa;
+        }
+
+        /* Centering the heading */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #343a40;
+            font-size: 2rem;
+        }
+
+        /* Styling the form inputs */
+        .form-label {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        /* Styling the submit button */
+        .btn-success {
+            width: 100%;
+            background-color: #28a745;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-12 col-md-6 form-container">
+            <h1>Signup on Wanderlust</h1>
             <form action="/signup" method="POST" class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
@@ -23,11 +81,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <button class="btn btn-success">sign up</button>
+                    <button class="btn btn-success">Sign up</button>
                 </div>
             </form>
         </div>
     </div>
-
 </body>
-
